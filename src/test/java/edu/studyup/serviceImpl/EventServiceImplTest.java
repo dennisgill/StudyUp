@@ -78,5 +78,12 @@ class EventServiceImplTest {
 			eventServiceImpl.updateEvent(event);
 		  });
 	}
-
+	
+	@Test
+	void testUpdateEvent_null_badCase() {
+		Event event = null;
+		Assertions.assertThrows(StudyUpException.class, () -> {
+			eventServiceImpl.updateEvent(event);
+		  });
+	}
 }
