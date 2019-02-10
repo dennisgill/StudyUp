@@ -45,7 +45,8 @@ class EventServiceImplTest {
 		//Create Event1
 		Event event = new Event();
 		event.setEventID(1);
-		event.setDate(new Date(1591288162));
+		long futureTime = 1649837547189L;
+		event.setDate(new Date(futureTime));
 		event.setName("Event 1");
 		Location location = new Location(-122, 37);
 		event.setLocation(location);
@@ -146,7 +147,8 @@ class EventServiceImplTest {
 		student2.setId(2);
 		Event event2 = new Event();
 		event2.setEventID(2);
-		event2.setDate(new Date(1691288162));
+		long futureTime = 1649837547189L;
+		event2.setDate(new Date(futureTime));
 		event2.setName("Event 2");
 		Location location = new Location(-122, 37);
 		event2.setLocation(location);
@@ -195,7 +197,8 @@ class EventServiceImplTest {
 		//Create Event2 in the past
 		Event event2 = new Event();
 		event2.setEventID(2);
-		event2.setDate(new Date(1455057762));
+		long pastTime = 1449837547189L;
+		event2.setDate(new Date(pastTime));
 		event2.setName("Event 2");
 		Location location = new Location(-122, 37);
 		event2.setLocation(location);
@@ -208,4 +211,29 @@ class EventServiceImplTest {
 		// Only event 1 should be in the returned active events list
 		assertEquals((eventServiceImpl.getActiveEvents()).size(), 1);
 	}
+	
+	// One event in the future and one event in the past are in the database
+	@Test
+	void testPastEvents_OneFutureOnePastEvent() throws StudyUpException {
+		//Create Event2 in the past
+		Event event2 = new Event();
+		event2.setEventID(2);
+		long pastTime = 1449837547189L;
+		event2.setDate(new Date(pastTime));
+		event2.setName("Event 2");
+		Location location = new Location(-122, 37);
+		event2.setLocation(location);
+		DataStorage.eventData.put(event2.getEventID(), event2);
+		
+		// Only event 2 should be in the returned past events list
+		assertEquals((eventServiceImpl.getPastEvents()).size(), 1);
+	}
+	
+	// One event in the future and one event in the past are in the database
+		@Test
+		void testDeleteEvent_GoodCase() throws StudyUpException {
+			int eventID = 1;
+			Event tempEvent = DataStorage.eventData.get(eventID);
+			assertEquals(eventServiceImpl.deleteEvent(eventID), tempEvent);
+		}
 }
