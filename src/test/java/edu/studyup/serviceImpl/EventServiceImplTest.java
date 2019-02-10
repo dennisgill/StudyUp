@@ -76,4 +76,35 @@ class EventServiceImplTest {
 		  });
 	}
 	
+	
+	// Event Name Length test cases //
+	
+	// 1. Event name equals 20 characters -- Test fails
+	@Test 
+	void testEventNameLength_20_Chars() throws StudyUpException {
+		int eventID = 1;
+		eventServiceImpl.updateEventName(eventID, "12345678912345678912");
+		assertEquals("12345678912345678912", DataStorage.eventData.get(eventID).getName());
+	}
+	
+	// 2. Event name less than 20 characters 
+		@Test 
+		void testEventNameLength_LessThan20Chars() throws StudyUpException {
+			int eventID = 1;
+			eventServiceImpl.updateEventName(eventID, "123456789123456789");
+			assertEquals("123456789123456789", DataStorage.eventData.get(eventID).getName());
+		}
+		
+	// 3. Event name greater than 20 characters 
+	@Test 
+	void testEventNameLength_GreaterThan20Chars() throws StudyUpException {
+		int eventID = 1;
+		Assertions.assertThrows(StudyUpException.class, () -> {eventServiceImpl.updateEventName(eventID, "123456789123456789123456789");});
+	}
+	
+	// Number of Students in an event test cases
+	
+	// 4. 
+	
+	
 }
