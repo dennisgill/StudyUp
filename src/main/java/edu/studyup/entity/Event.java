@@ -46,7 +46,8 @@ public class Event {
 	}
 
 	public Date getDate() {
-		return date;
+		// BUG: May expose internal representation by returning Event.date
+		return date == null ? null : (Date) date.clone();
 	}
 
 	public void setDate(Date date) {

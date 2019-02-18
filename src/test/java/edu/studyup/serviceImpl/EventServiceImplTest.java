@@ -191,7 +191,7 @@ class EventServiceImplTest {
 		Location location = new Location(-122, 37);
 		event2.setLocation(location);
 		DataStorage.eventData.put(event2.getEventID(), event2);
-		
+    
 		// Only event 1 should be in the returned active events list
 		assertEquals((eventServiceImpl.getActiveEvents()).size(), 1);
 	}

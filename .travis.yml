@@ -1,6 +1,6 @@
 language: java
 jdk: openjdk11
 script: 
-    - mvn clean install test
+    - mvn clean install spotbugs:spotbugs test
 after_success:
     - mvn jacoco:report coveralls:report
