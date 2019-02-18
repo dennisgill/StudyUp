@@ -46,8 +46,9 @@ public class EventServiceImpl implements EventService {
 		Map<Integer, Event> eventData = DataStorage.eventData;
 		List<Event> pastEvents = new ArrayList<>();
 		
-		for (Integer key : eventData.keySet()) {
-			Event ithEvent= eventData.get(key);
+		// Bug: Use entry instead of keyset
+		for (Map.Entry<Integer, Event> entry : eventData.entrySet()) {
+			Event ithEvent= entry.getValue();
 			// Checks if an event date is before today, if yes, then add to the past event list.
 			if(ithEvent.getDate().before(new Date())) {
 				pastEvents.add(ithEvent);
