@@ -21,7 +21,7 @@ public class EventServiceImpl implements EventService {
 			throw new StudyUpException("No event found.");
 		}
 
-		if (name.length() >= 20) {
+		if(name.length() >= 20) {
 			throw new StudyUpException("Length too long. Maximun is 20");
 		}
 		event.setName(name);
@@ -34,7 +34,12 @@ public class EventServiceImpl implements EventService {
 	public List<Event> getActiveEvents() {
 		Map<Integer, Event> eventData = DataStorage.eventData;
 		List<Event> activeEvents = new ArrayList<>();
-		// Bug: Use entry instead of keyset
+		
+//      BUG : inefficient use of keySet iterator instead of entrySet iterator
+//		for (Integer key : eventData.keySet()) {
+//			Event ithEvent= eventData.get(key);
+//			activeEvents.add(ithEvent);
+		
 		for (Map.Entry<Integer, Event> entry: eventData.entrySet()) {
 			Event ithEvent= entry.getValue();
 			activeEvents.add(ithEvent);
@@ -47,7 +52,9 @@ public class EventServiceImpl implements EventService {
 		Map<Integer, Event> eventData = DataStorage.eventData;
 		List<Event> pastEvents = new ArrayList<>();
 		
-		// Bug: Use entry instead of keyset
+//      BUG : inefficient use of keySet iterator instead of entrySet iterator
+//		for (Integer key : eventData.keySet()) {
+//			Event ithEvent= eventData.get(key);
 		for (Map.Entry<Integer, Event> entry: eventData.entrySet()) {
 			Event ithEvent= entry.getValue();
 			// Checks if an event date is before today, if yes, then add to the past event list.
