@@ -11,7 +11,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import edu.studyup.entity.Event;
@@ -154,9 +153,6 @@ class EventServiceImplTest {
 		event2.setLocation(location);
 		DataStorage.eventData.put(event2.getEventID(), event2);
 		
-		List<Student> students = new ArrayList<>();
-		students.add(student2);
-		
 		// Only event 1 should be in the returned active events list
 		assertEquals(eventServiceImpl.addStudentToEvent(student2, eventID2), DataStorage.eventData.get(eventID2));
 	}
@@ -180,20 +176,12 @@ class EventServiceImplTest {
 	// One event in the future is in the database
 	@Test
 	void testActiveEvents_OneFutureEvent() throws StudyUpException {
-		int eventID = 1;
-		
-		List<Event> active = new ArrayList<>();
-		active.add(DataStorage.eventData.get(eventID));
-
 		assertEquals((eventServiceImpl.getActiveEvents()).size(), 1);
 	}
 	
 	// One event in the future and one event in the past are in the database
 	@Test
-	void testActiveEvents_OneFutureOnePastEvent() throws StudyUpException {
-		int eventID = 1;
-		int eventID2 = 2;
-		
+	void testActiveEvents_OneFutureOnePastEvent() throws StudyUpException {	
 		//Create Event2 in the past
 		Event event2 = new Event();
 		event2.setEventID(2);
@@ -203,11 +191,7 @@ class EventServiceImplTest {
 		Location location = new Location(-122, 37);
 		event2.setLocation(location);
 		DataStorage.eventData.put(event2.getEventID(), event2);
-		
-		List<Event> active = new ArrayList<>();
-		active.add(DataStorage.eventData.get(eventID));
-		active.add(DataStorage.eventData.get(eventID2));
-		
+    
 		// Only event 1 should be in the returned active events list
 		assertEquals((eventServiceImpl.getActiveEvents()).size(), 1);
 	}
