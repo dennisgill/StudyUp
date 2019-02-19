@@ -14,5 +14,5 @@ import edu.studyup.entity.Event;
  * 
  */
 public class DataStorage {
-	public static Map<Integer, Event> eventData = new HashMap<Integer, Event>();
+	public final static Map<Integer, Event> eventData = new HashMap<Integer, Event>();
 }
