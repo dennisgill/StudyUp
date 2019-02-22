@@ -2,7 +2,7 @@ package edu.studyup.util;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Collections;
 import edu.studyup.entity.Event;
 
 /***
@@ -14,5 +14,5 @@ import edu.studyup.entity.Event;
  * 
  */
 public class DataStorage {
-	public final static Map<Integer, Event> eventData = new HashMap<Integer, Event>();
+	public final static Map<Integer, Event> eventData = Collections.unmodifiableMap(new HashMap<Integer, Event>());
 }
