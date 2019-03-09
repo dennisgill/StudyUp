@@ -24,4 +24,4 @@ while read line; do
         break
     fi
 done</etc/nginx/nginx.conf
-eval "$/usr/sbin/nginx -s reload"
+eval "/usr/sbin/nginx -s reload"
