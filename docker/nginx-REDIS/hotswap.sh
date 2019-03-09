@@ -12,7 +12,7 @@ while read line; do
           if [ "$address" = "$swap" ]; then
             echo You are already using that server
           else
-            sed -i "0,/${address}/ s/${address}/${swap}/" nginx.conf
+            sed -i "0,/${address}/ s/${address}/${swap}/" /etc/nginx/nginx.conf
             break
           fi
         fi
